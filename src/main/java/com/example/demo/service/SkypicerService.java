@@ -1,0 +1,32 @@
+package com.example.demo.service;
+
+import com.example.demo.dto.SkypicerDTO;
+import com.example.demo.dto.UserDataDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+
+public class SkypicerService {
+    private UserDataDTO userData;
+    private String skypicerAPI = "https://api.skypicker.com/flights?fly_from="+userData.getCountryFrom()+"&v=3&date_from="+userData.getStartDate()+"&date_to="+userData.getEndDate()+"&partner=picky&fly_to="+userData.getCountryTo();
+
+    public SkypicerService(UserDataDTO data){
+        this.userData = data;
+    }
+
+    public SkypicerDTO sendRequest(){
+        SkypicerDTO dto = new SkypicerDTO();
+        RestTemplate restTemplate = new RestTemplate();
+        String json = restTemplate.getForObject(skypicerAPI, String.class);
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            dto = mapper.readValue(json, SkypicerDTO.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return dto;
+    }
+}

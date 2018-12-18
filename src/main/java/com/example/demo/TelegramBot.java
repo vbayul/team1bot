@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +11,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
+    @Value("${telegram.name}")
+    private String telegramName;
+    @Value("${telegram.token}")
+    private String telegramToke;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -27,12 +32,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "Cheapest_Travel_bot";
+        return telegramName;
     }
 
     @Override
     public String getBotToken() {
-        return "673529372:AAGetKSXKHvJy8EA95KP2P9BtcfBhRD5DJE";
+        return telegramToke;
 	}
   }
 

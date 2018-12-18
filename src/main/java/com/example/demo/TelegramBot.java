@@ -1,8 +1,8 @@
 package com.example.demo;
 
+
 import com.example.demo.Builder.ButtonsFactory;
-import com.example.demo.Builder.WelcomeButtons;
-import com.example.demo.TelegramButtonsController.ButtonsController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -12,10 +12,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
-
-    private final String botName = "Cheapest_Travel_bot";
-    private final String botToken = "673529372:AAGetKSXKHvJy8EA95KP2P9BtcfBhRD5DJE";
-
+    @Value("${telegram.name}")
+    private String telegramName;
+    @Value("${telegram.token}")
+    private String telegramToke;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -39,12 +39,15 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return botName;
+        return telegramName;
+
     }
 
     @Override
     public String getBotToken() {
-        return botToken;
+
+        return telegramToke;
+
 	}
   }
 

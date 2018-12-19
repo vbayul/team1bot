@@ -2,11 +2,15 @@ package com.example.demo.TelegramButtonsController;
 
 
 import com.example.demo.Builder.*;
+import com.example.demo.dto.Datum;
 import com.example.demo.dto.SkypicerDTO;
 import com.example.demo.dto.UserDataDTO;
 import com.example.demo.service.SkypicerService;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.time.Instant;
+import java.util.Date;
 
 
 public class ButtonsController {
@@ -71,7 +75,15 @@ public class ButtonsController {
                     message.setText(skpDTO.getCurrency());
                     message.setText(skpDTO.getAdditionalProperties().toString());
                     message.setText(skpDTO.getAllAirlines().toString());
-                    message.setText(skpDTO.getResults().toString());
+                    String messageForLink = "";
+                    for (Datum datum : skpDTO.getData())
+                    {
+                        if (messageForLink.length() < 4000)
+                            messageForLink = messageForLink +" Country from: "+ datum.getCityFrom() + " Country to:" +datum.getCityTo() + " Departure time: " + Date.from(Instant.ofEpochSecond( datum.getDTime() )) +
+                                    " Arrive time: " +Date.from(Instant.ofEpochSecond( datum.getATime() ))  + " Price " + datum.getPrice() +  System.lineSeparator() + "-----------------------";
+                    }
+                    System.out.println(messageForLink);
+                    message.setText(messageForLink);
                     break;
 
                 case "Budget":

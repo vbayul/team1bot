@@ -22,6 +22,7 @@ public class SkypicerService {
         System.out.println(skypicerAPI);
         String json = restTemplate.getForObject(skypicerAPI, String.class);
 
+        System.out.println(json);
         ObjectMapper mapper = new ObjectMapper();
         try {
             dto = mapper.readValue(json, SkypicerDTO.class);

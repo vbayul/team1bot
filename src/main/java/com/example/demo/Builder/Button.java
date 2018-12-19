@@ -21,6 +21,7 @@ public class Button {
         KeyboardRow keyboardFirstRow = new KeyboardRow();
         KeyboardRow keyboardSecondRow = new KeyboardRow();
         KeyboardRow keyboardThirdRow = new KeyboardRow();
+        KeyboardRow keyboardFourthRow = new KeyboardRow();
 
         for (int i = 0; i < buttons.size(); i++) {
             if (keyboardFirstRow.size() < 2) {
@@ -31,14 +32,21 @@ public class Button {
                 } else {
                     if (keyboardThirdRow.size() < 2) {
                         keyboardThirdRow.add(buttons.get(i));
+                    } else {
+                        if (keyboardFourthRow.size() < 2) {
+                            keyboardFourthRow.add(buttons.get(i));
+                        }
                     }
                 }
             }
-
         }
+
+
 
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
+        keyboard.add(keyboardThirdRow);
+        keyboard.add(keyboardFourthRow);
 
         replyKeyboardMarkup.setKeyboard(keyboard);
 

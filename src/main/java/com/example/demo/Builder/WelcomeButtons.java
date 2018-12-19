@@ -8,17 +8,14 @@ import java.util.List;
 
 public class WelcomeButtons {
 
-    private static KeyboardButton setupCountry = new KeyboardButton("My default country");
-    private static KeyboardButton findTrip = new KeyboardButton("Find a trip");
-    private static KeyboardButton bookMarks = new KeyboardButton("My bookmarks");
+
+    private static KeyboardButton findTrip = new KeyboardButton("Find trip");
+
 
 
     public static List<KeyboardButton> getButtons() {
       List<KeyboardButton> buttons = new ArrayList<>();
-      buttons.add(setupCountry);
       buttons.add(findTrip);
-      buttons.add(bookMarks);
-
       return buttons;
     }
 

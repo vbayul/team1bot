@@ -78,7 +78,7 @@ public class ButtonsController {
                     String messageForLink = "";
                     for (Datum datum : skpDTO.getData())
                     {
-                        if (messageForLink.length() < 4000)
+                        if (messageForLink.length() < 3500)
                             messageForLink = messageForLink +" Country from: "+ datum.getCityFrom() + " Country to:" +datum.getCityTo() + " Departure time: " + Date.from(Instant.ofEpochSecond( datum.getDTime() )) +
                                     " Arrive time: " +Date.from(Instant.ofEpochSecond( datum.getATime() ))  + " Price " + datum.getPrice() +  System.lineSeparator() + "-----------------------";
                     }

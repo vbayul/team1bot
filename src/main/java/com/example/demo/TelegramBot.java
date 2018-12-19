@@ -1,7 +1,6 @@
 package com.example.demo;
 
-
-import com.example.demo.Builder.ButtonsFactory;
+import com.example.demo.TelegramButtonsController.ButtonsController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -23,10 +22,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message = new SendMessage()
                     .setChatId(update.getMessage().getChatId())
-                    .setText("Choose what are you looking for");
+                    .setText("Success");
 
-            message.setReplyMarkup(ButtonsFactory.getButtons(update.getMessage().getText()));
-            message.setText("Answer to user");
+            ButtonsController.actionManager(update.getMessage().getText(),message, update);
 
             try {
                 execute(message);
